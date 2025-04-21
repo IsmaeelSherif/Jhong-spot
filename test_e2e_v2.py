@@ -16,6 +16,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('model_dir', help='Path to the model dir')
     parser.add_argument('frame_dir', help='Path to the frame dir')
+    parser.add_argument('split_path', help='Path to the split.json file')
     parser.add_argument('-s', '--split',
                         choices=['train', 'val', 'test', 'challenge'],
                         required=True)
@@ -50,7 +51,7 @@ def get_last_epoch(model_dir):
     return last_epoch
 
 
-def main(model_dir, frame_dir, split, no_overlap, save, save_as, dataset):
+def main(model_dir, frame_dir, split_path, split, no_overlap, save, save_as, dataset):
     config_path = os.path.join(model_dir, 'config.json')
     with open(config_path) as fp:
         print(fp.read())
@@ -78,7 +79,6 @@ def main(model_dir, frame_dir, split, no_overlap, save, save_as, dataset):
     model.load(torch.load(os.path.join(
         model_dir, 'checkpoint_{:03d}.pt'.format(best_epoch))))
 
-    split_path = "challenge.json"
     split_data = ActionSpotVideoDataset(
         classes, split_path, frame_dir, config['modality'], config['clip_len'],
         overlap_len=0 if no_overlap else config['clip_len'] // 2,
