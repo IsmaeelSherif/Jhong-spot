@@ -491,8 +491,12 @@ class ActionSpotVideoDataset(Dataset):
             ):
                 has_clip = True
                 self._clips.append((l['video'], i))
-                print('clips', self._clips)
             assert has_clip, l
+        import json
+
+        # Load JSON file
+        with open('clips.json', 'w') as file:
+            json.dump({"clips": self._clips}, file, indent=4)
 
     def __len__(self):
         return len(self._clips)
