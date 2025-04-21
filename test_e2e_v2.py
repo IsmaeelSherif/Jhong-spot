@@ -16,6 +16,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('model_dir', help='Path to the model dir')
     parser.add_argument('frame_dir', help='Path to the frame dir')
+    parser.add_argument('pred_dir', help='Path to the output pred')
     parser.add_argument('split_path', help='Path to the split.json file')
     parser.add_argument('-s', '--split',
                         choices=['train', 'val', 'test', 'challenge'],
@@ -51,7 +52,7 @@ def get_last_epoch(model_dir):
     return last_epoch
 
 
-def main(model_dir, frame_dir, split_path, split, no_overlap, save, save_as, dataset):
+def main(model_dir, frame_dir, pred_dir, split_path, split, no_overlap, save, save_as, dataset):
     config_path = os.path.join(model_dir, 'config.json')
     with open(config_path) as fp:
         print(fp.read())
@@ -84,13 +85,7 @@ def main(model_dir, frame_dir, split_path, split, no_overlap, save, save_as, dat
         overlap_len=0 if no_overlap else config['clip_len'] // 2,
         crop_dim=config['crop_dim'])
 
-    pred_file = None
-    if save_as is not None:
-        pred_file = save_as
-    elif save is not None:
-        pred_file = os.path.join(
-            model_dir, 'pred-{}.{}'.format(split, best_epoch))
-        assert not os.path.exists(pred_file), pred_file
+    pred_file = os.path.join(pred_dir, 'pred-{}.{}'.format(split, best_epoch))
 
     if pred_file is not None:
         print('Saving predictions:', pred_file)
