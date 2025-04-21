@@ -56,8 +56,7 @@ class FrameReader:
             frame_path = os.path.join(
                 self._frame_dir,
                 FrameReader.IMG_NAME.format(frame_num))
-            # try:
-            if True:
+            try:
                 img = self.read_frame(frame_path)
                 if self._crop_transform:
                     if self._same_transform:
@@ -77,9 +76,9 @@ class FrameReader:
                 if not self._same_transform:
                     img = self._img_transform(img)
                 ret.append(img)
-            # except RuntimeError:
-            #     print('Missing file!', frame_path)
-            #     n_pad_end += 1
+            except RuntimeError:
+                print('Missing file!', frame_path)
+                n_pad_end += 1
 
         # In the multicrop case, the shape is (B, T, C, H, W)
         ret = torch.stack(ret, dim=int(len(ret[0].shape) == 4))
