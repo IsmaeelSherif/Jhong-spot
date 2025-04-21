@@ -39,7 +39,6 @@ class FrameReader:
 
     def load_frames(self, video_name, start, end, pad=False, stride=1,
                     randomize=False):
-        print("load frames", "start", start, "end", end)
         rand_crop_state = None
         rand_state_backup = None
         ret = []
