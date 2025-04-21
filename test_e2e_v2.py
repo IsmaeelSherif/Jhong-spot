@@ -73,6 +73,8 @@ def main(model_dir, frame_dir, pred_dir, split_path, split, no_overlap, save, sa
 
     classes = load_classes()
 
+    os.makedirs(pred_dir, exist_ok=True)
+
     model = E2EModel(
         len(classes) + 1, config['feature_arch'], config['temporal_arch'],
         clip_len=config['clip_len'], modality=config['modality'],
