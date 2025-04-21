@@ -39,7 +39,7 @@ class FrameReader:
 
     def load_frames(self, video_name, start, end, pad=False, stride=1,
                     randomize=False):
-        print("load frames", "start", start, "end", start)
+        print("load frames", "start", start, "end", end)
         rand_crop_state = None
         rand_state_backup = None
         ret = []
@@ -491,6 +491,7 @@ class ActionSpotVideoDataset(Dataset):
             ):
                 has_clip = True
                 self._clips.append((l['video'], i))
+                print('clips', self._clips)
             assert has_clip, l
 
     def __len__(self):
