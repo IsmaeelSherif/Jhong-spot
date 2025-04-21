@@ -53,7 +53,7 @@ class FrameReader:
                 continue
 
             frame_path = os.path.join(
-                self._frame_dir, video_name,
+                self._frame_dir,
                 FrameReader.IMG_NAME.format(frame_num))
             try:
                 img = self.read_frame(frame_path)

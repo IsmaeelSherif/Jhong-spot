@@ -36,8 +36,7 @@ def get_duration(video_path):
     return moviepy.editor.VideoFileClip(video_path).duration
 
 
-def worker(args):
-    video_name, video_path, out_dir, sample_fps = args
+def worker(video_name, video_path, out_dir, sample_fps):
 
     def get_stride(src_fps):
         if sample_fps <= 0:
@@ -136,30 +135,7 @@ def main(video_dir, out_dir, num_workers,
     global RECALC_FPS_ONLY
     RECALC_FPS_ONLY = recalc_fps
 
-    worker_args = []
-    for league in os.listdir(video_dir):
-        league_dir = os.path.join(video_dir, league)
-        for season in os.listdir(league_dir):
-            season_dir = os.path.join(league_dir, season)
-            for game in os.listdir(season_dir):
-                game_dir = os.path.join(season_dir, game)
-                for video_file in os.listdir(game_dir):
-                    if video_file.endswith('.mkv'):
-                        video_name = os.path.splitext(video_file)[0].replace(
-                            '_720p', '')
-                        worker_args.append((
-                            os.path.join(league, season, game, video_file),
-                            os.path.join(game_dir, video_file),
-                            os.path.join(
-                                out_dir, league, season, game, video_name
-                            ) if out_dir else None,
-                            sample_fps
-                        ))
-
-    with Pool(num_workers) as p:
-        for _ in tqdm(p.imap_unordered(worker, worker_args),
-                      total=len(worker_args)):
-            pass
+    worker("video_name", video_dir, out_dir, sample_fps)
     print('Done!')
 
 

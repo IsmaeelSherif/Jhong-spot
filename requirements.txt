@@ -5,6 +5,7 @@ numpy>=1.21.4
 Pillow>=9.1.0
 matplotlib>=3.2.2
 flask>=1.1.2
+moviepy==1.0.3
 opencv-python
 tqdm
 tabulate
