@@ -78,7 +78,7 @@ def main(model_dir, frame_dir, split, no_overlap, save, save_as, dataset):
     model.load(torch.load(os.path.join(
         model_dir, 'checkpoint_{:03d}.pt'.format(best_epoch))))
 
-    split_path = os.path.join('data', dataset, '{}.json'.format(split))
+    split_path = "challenge.json"
     split_data = ActionSpotVideoDataset(
         classes, split_path, frame_dir, config['modality'], config['clip_len'],
         overlap_len=0 if no_overlap else config['clip_len'] // 2,
