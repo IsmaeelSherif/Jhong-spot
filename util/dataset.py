@@ -13,9 +13,28 @@ DATASETS = [
     'soccernet_ball'
 ]
 
+classes = [
+    "Penalty",
+    "Kick-off",
+    "Goal",
+    "Substitution",
+    "Offside",
+    "Shots on target",
+    "Shots off target",
+    "Clearance",
+    "Ball out of play",
+    "Throw-in",
+    "Foul",
+    "Indirect free-kick",
+    "Direct free-kick",
+    "Corner",
+    "Yellow card",
+    "Red card",
+    "Yellow->red card"
+]
 
 def load_classes():
-    return {x: i + 1 for i, x in enumerate(load_text('class.txt'))}
+    return {x: i + 1 for i, x in enumerate(classes)}
 
 
 def read_fps(video_frame_dir):
