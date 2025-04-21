@@ -69,7 +69,7 @@ def main(model_dir, frame_dir, split, no_overlap, save, save_as, dataset):
             print('Dataset mismatch: {} != {}'.format(
                 dataset, config['dataset']))
 
-    classes = load_classes(os.path.join('class.txt'))
+    classes = load_classes()
 
     model = E2EModel(
         len(classes) + 1, config['feature_arch'], config['temporal_arch'],
