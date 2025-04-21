@@ -76,7 +76,7 @@ class FrameReader:
                     img = self._img_transform(img)
                 ret.append(img)
             except RuntimeError:
-                # print('Missing file!', frame_path)
+                print('Missing file!', frame_path)
                 n_pad_end += 1
 
         # In the multicrop case, the shape is (B, T, C, H, W)
