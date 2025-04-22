@@ -14,24 +14,25 @@ DATASETS = [
 ]
 
 classes = [
-    "Penalty",
-    "Kick-off",
-    "Goal",
-    "Substitution",
-    "Offside",
-    "Shots on target",
-    "Shots off target",
-    "Clearance",
     "Ball out of play",
-    "Throw-in",
-    "Foul",
-    "Indirect free-kick",
-    "Direct free-kick",
+    "Clearance",
     "Corner",
-    "Yellow card",
+    "Direct free-kick",
+    "Foul",
+    "Goal",
+    "Indirect free-kick",
+    "Kick-off",
+    "Offside",
+    "Penalty",
     "Red card",
+    "Shots off target",
+    "Shots on target",
+    "Substitution",
+    "Throw-in",
+    "Yellow card",
     "Yellow->red card"
 ]
+
 
 def load_classes():
     return {x: i + 1 for i, x in enumerate(classes)}
